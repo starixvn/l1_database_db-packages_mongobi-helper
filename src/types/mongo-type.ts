@@ -7,6 +7,9 @@ export enum MongoType {
   BOOL    = 'bool',
   DATE    = 'date',
   FITLER  = 'mongo.Filter',
+
+  object  = 'bson.Object',
+  array   = 'bson.Array',
 };
 
 export default MongoType;
