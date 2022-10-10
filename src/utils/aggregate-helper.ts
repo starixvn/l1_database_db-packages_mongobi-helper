@@ -44,5 +44,5 @@ export function arrToJSON(expression: object | string) {
   ] });
 };
 
-const AggregateHelper = {};
+const AggregateHelper = { objToJSON, arrToJSON };
 export default AggregateHelper;
