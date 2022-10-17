@@ -1,11 +1,11 @@
 {
   "name": "@ldb/mongobi-helper",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "MongoBI Helper",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "repl": "ts-node --experimentalSpecifierResolution=node --transpileOnly --interactive",
+    "repl": "env $(grep -v '^#' .env | xargs -d '\n') ts-node --experimentalSpecifierResolution=node --transpileOnly --interactive",
     "build": "rm -rf lib && tsc -p src",
     "prepare": "npm run build"
   },
@@ -19,13 +19,14 @@
   },
   "license": "ISC",
   "dependencies": {
-    "bson": "4.7.0"
+    "bson": "4.7.0",
+    "mongodb": "4.10.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.36.2",
-    "@typescript-eslint/parser": "^5.36.2",
-    "eslint": "^8.23.0",
+    "@typescript-eslint/eslint-plugin": "^5.40.0",
+    "@typescript-eslint/parser": "^5.40.0",
+    "eslint": "^8.25.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
-    "typescript": "^4.8.3"
+    "typescript": "^4.8.4"
   }
 }

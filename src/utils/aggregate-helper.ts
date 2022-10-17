@@ -1,4 +1,5 @@
-export function objToJSON(expression: object | string) {
+export function objToJSON(expression: object | string, maxLevel: number = 1, level: number = 0): object | string {
+  if (level > maxLevel) return expression;
   return ({ $concat: [
     '{',
     { $reduce: {
@@ -12,6 +13,8 @@ export function objToJSON(expression: object | string) {
           branches: [
             { case: { $eq: [{ $type: '$$this.v' }, 'null'] } , then: 'null' },
             { case: { $in: [{ $type: '$$this.v' }, ['double', 'bool', 'int', 'long', 'decimal']] } , then: { $toString: '$$this.v' } },
+            { case: { $eq: [{ $type: '$$this.v' }, 'object'] } , then: objToJSON('$$this.v', maxLevel, level + 1) },
+            { case: { $eq: [{ $type: '$$this.v' }, 'array'] } , then: arrToJSON('$$this.v', maxLevel, level + 1) },
           ],
           default: { $concat: ['"', { $toString: '$$this.v' }, '"'] },
         } },
@@ -21,7 +24,8 @@ export function objToJSON(expression: object | string) {
   ] });
 };
 
-export function arrToJSON(expression: object | string) {
+export function arrToJSON(expression: object | string, maxLevel: number = 1, level: number = 0): object | string {
+  if (level > maxLevel) return expression;
   return ({ $concat: [
     '[',
     { $reduce: {
@@ -34,7 +38,8 @@ export function arrToJSON(expression: object | string) {
           branches: [
             { case: { $eq: [{ $type: '$$this' }, 'null'] } , then: 'null' },
             { case: { $in: [{ $type: '$$this' }, ['double', 'bool', 'int', 'long', 'decimal']] } , then: { $toString: '$$this' } },
-            { case: { $eq: [{ $type: '$$this' }, 'object'] } , then: objToJSON('$$this') },
+            { case: { $eq: [{ $type: '$$this' }, 'object'] } , then: objToJSON('$$this', maxLevel, level + 1) },
+            { case: { $eq: [{ $type: '$$this' }, 'array'] } , then: arrToJSON('$$this', maxLevel, level + 1) },
           ],
           default: { $concat: ['"', { $toString: '$$this' }, '"'] },
         } },
