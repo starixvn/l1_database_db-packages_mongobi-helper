@@ -1,6 +1,6 @@
 {
   "name": "@ldb/mongobi-helper",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "MongoBI Helper",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -21,9 +21,11 @@
   },
   "license": "ISC",
   "dependencies": {
-    "@ldb/db-common": "1.1.2"
+    "@ldb/db-common": "1.1.4"
   },
   "devDependencies": {
+    "@types/mongodb": "^4.0.7",
+    "@types/node": "^18.11.2",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
     "eslint": "^8.25.0",
