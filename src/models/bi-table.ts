@@ -1,6 +1,8 @@
-import { Document, EJSON } from 'bson';
+import { BSON } from '@ldb/db-common';
 import BIColumn    from './bi-column';
 import NameMapping from '../interfaces/name-mapping';
+
+const { EJSON } = BSON;
 
 interface BITableInput extends NameMapping {
   pipeline    : Document[] | string;
